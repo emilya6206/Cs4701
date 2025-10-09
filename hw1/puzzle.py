@@ -359,7 +359,7 @@ def main():
         return
         
     end_time = time.time()
-    writeOutput("running_time_: %.8f" % (end_time-start_time), "a")
+    writeOutput("running_time: %.8f" % (end_time-start_time), "a")
 
     
     ram = (resource.getrusage(resource.RUSAGE_SELF).ru_maxrss - start_ram)
