@@ -25,6 +25,7 @@ COL = "123456789"
 
 
 def print_board(board):
+
     """Helper function to print board in a square."""
     print("-----------------")
     for i in ROW:

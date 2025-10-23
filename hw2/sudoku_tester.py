@@ -17,6 +17,8 @@ TO-DO: Time your run of the sudoku boards
 
 import sys
 from sudoku import *
+from time import time
+from statistics import mean, stdev
 
 def main():
     if len(sys.argv) > 1:
@@ -51,10 +53,13 @@ def main():
         successes = []
         failures = []
         skips = []
+        times = []
         
-        for puzzle_no in range(4):
-        #for puzzle_no in range(len(puzzles)):
+        
+        for puzzle_no in range(len(puzzles)):
+            startTime = time()
             puzzle = puzzles[puzzle_no]
+
 
             if len(puzzle) < 9:
                 skips.append(test_no)
@@ -70,6 +75,8 @@ def main():
 
             # Solve with backtracking
             solved_board = backtracking(board)
+            elapsed = time() - startTime
+            times.append(elapsed)
 
             # Print solved board. TODO: Uncomment this for debugging.
             # print_board(solved_board)
@@ -80,6 +87,8 @@ def main():
                 failures.append((test_no, solved_board))
             test_no += 1
 
+            
+            
         # Print results
         print("=== Sudoku Test Results ===")
 
@@ -101,10 +110,11 @@ def main():
             for skip in skips:
                 print("    - %d" % skip)
         
-        print("Min")
-        print("Max")
-        print("Mean")
-        print("Standard Deviation")
+        print(f"Min Time:\t{min(times):.4f} s")
+        print(f"Max Time:\t{max(times):.4f} s")
+        print(f"Mean Time:\t{mean(times):.4f} s")
+        print(f"Standard Deviation:\t{stdev(times):.4f} s")
+        
     except FileNotFoundError:
         print("Error: 'sudokus_start.txt' file not found.")
         exit()
