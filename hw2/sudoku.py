@@ -111,11 +111,10 @@ if __name__ == '__main__':
                   for r in range(9) for c in range(9)}       
         
        
-        print_board(board)
+   
         solved_board = backtracking(board)
         
-        
-        print_board(solved_board)
+    
         # Write board to file
         out_filename = 'output.txt'
         outfile = open(out_filename, "w")
@@ -123,6 +122,7 @@ if __name__ == '__main__':
         outfile.write('\n')
     else:
         print("Usage: python3 sudoku.py <input string>")
+        exit()
     
     print("Finishing all boards in file.")
 
