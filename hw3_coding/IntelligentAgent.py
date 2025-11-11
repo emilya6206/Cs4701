@@ -4,10 +4,7 @@ import time
 from BaseAI import BaseAI
 
 class IntelligentAgent(BaseAI):
-    def __init__(self):
-        self.time_limit = 0.2 
-        self.start_time = None
-
+    
     def getMove(self, grid):
         depth = self.getAdaptiveDepth(grid)
         return self.bestMove(grid,depth)
@@ -19,12 +16,11 @@ class IntelligentAgent(BaseAI):
         return False
     
     def bestMove(self, grid, maxDepth):
-        self.start_time = time.perf_counter()
+       
         move = None
         best_move = None
         for depth in range(1, maxDepth + 1):
-            if time.perf_counter() - self.start_time > self.time_limit:
-                break
+            
             score, move= self.expectiminimax_w_ab(grid, 0,depth,  float('-inf'), float('inf'), True)
             
             if move is not None:
